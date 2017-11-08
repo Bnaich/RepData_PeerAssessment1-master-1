@@ -1,0 +1,54 @@
+Load the data (note that the data is already archived in the repository)
+
+```r
+unzip("activity.zip")
+activityDF <- read.csv ("activity.csv",
+           sep = ",",
+           header = TRUE,
+           na.strings = "NA",
+           colClasses = c ("numeric", "character", "numeric)
+           )
+```
+
+
+
+we ignore (filter out) the missing values(NA) in the dataset for the first part. 
+
+```r
+completeDF <- activityDF[!is.na(activityDF$steps),]
+
+```
+
+summarise complete (without NAs) activity data.
+
+```r
+summary(completeDF)
+
+```
+
+
+
+now we examine the mean total number of steps taken per day
+
+a histogram of the taotal number of steps taken each day,
+
+```r
+stepsByDate <- aggregate(steps ~ date, data = completeDF, FUN = sum)
+barplot(stepByDate$steps, names.arg = stepsByDate$date, xlab = "Date", ylab = "Number of Steps")
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
